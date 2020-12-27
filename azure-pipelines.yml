@@ -7,8 +7,10 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: mvn clean --quiet
+- script: |
   workingDirectory: my-app/
+    mvn clean
+    ls -l
   displayName: '1. clean'
 
 - script: |
