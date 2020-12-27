@@ -7,4 +7,10 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- task: Docker@2
+  displayName: docker io
+  inputs:
+    containerRegistry: 'dockerhub'
+    command: 'login'
+
 - script: docker run nashpaz1/maven-hello-world:17
