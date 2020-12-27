@@ -7,4 +7,4 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: docker run $(dockerhub)/nashpaz1/maven-hello-world:17
+- script: docker run nashpaz1/maven-hello-world:17
