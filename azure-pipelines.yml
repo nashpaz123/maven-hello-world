@@ -11,6 +11,6 @@ steps:
   workingDirectory: my-app/
   displayName: '1. clean'
 
-- script: mvn package && ls -l
+- script: mvn package && ack -a -f
   workingDirectory: my-app/
   displayName: '2. package and check files'
