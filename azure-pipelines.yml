@@ -6,19 +6,28 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+- name: appDir
+  value: my-app/
+
 steps:
 - script: mvn clean
-  workingDirectory: my-app/
+  workingDirectory: ${{ appDir }}
   displayName: '1. clean'
 
 - script: mvn compile --quiet && ls -R -l target/classes/
-  workingDirectory: my-app/
+  workingDirectory: ${{ appDir }}
   displayName: 'compile, per instructions, and check files'
 
 - script: mvn package --quiet && ls -l target/ 
-  workingDirectory: my-app/
+  workingDirectory: ${{ appDir }}
   displayName: '2. package and check files'
 
 - script: java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
-  workingDirectory: my-app/
+  workingDirectory: ${{ appDir }}
   displayName: '3. sanity'
+
+#- task: PublishBuildArtifacts@1
+#  inputs:
+#    pathToPublish: '${{ appDir }}/target/my-app-1.0-SNAPSHOT.jar'
+#    artifactName: drop
