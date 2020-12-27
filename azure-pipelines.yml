@@ -45,3 +45,9 @@ steps:
     Dockerfile: '**/Dockerfile'
     buildContext: '$(appDir)'
     tags: '$(Build.BuildNumber)'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'dockerhub'
+    command: 'start'
+    container: 'nashpaz1/maven-hello-world:$(Build.BuildNumber)'
