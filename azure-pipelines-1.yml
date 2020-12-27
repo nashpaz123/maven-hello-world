@@ -1,0 +1,10 @@
+# https://github.com/nashpaz123/maven-hello-world
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: docker run $(dockerhub)/nashpaz1/maven-hello-world:17
