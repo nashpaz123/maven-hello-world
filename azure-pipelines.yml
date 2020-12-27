@@ -43,4 +43,5 @@ steps:
     repository: 'my-app-1.0'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
+    buildContext: '**/$(appDir)'
     tags: '$(Build.BuildNumber)'
