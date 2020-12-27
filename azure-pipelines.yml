@@ -1,0 +1,42 @@
+# https://github.com/nashpaz123/maven-hello-world
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+- name: appDir
+  value: my-app/
+
+steps:
+- script: mvn clean
+  workingDirectory: $(appDir)
+  displayName: '1. clean'
+
+- script: mvn compile --quiet && ls -R -l target/classes/
+  workingDirectory: $(appDir)
+  displayName: 'compile, per instructions, and check files'
+
+- script: mvn package --quiet && ls -l target/ 
+  workingDirectory: $(appDir)
+  displayName: '2. package and check files'
+
+- script: java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
+  workingDirectory: $(appDir)
+  displayName: '3. sanity'
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(appDir)/target/my-app-1.0-SNAPSHOT.jar'
+    artifactName: drop
+
+#per instructions at: https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/containers/push-image?view=azure-devops
+- task: Docker@2
+  displayName: Build and Push
+  inputs:
+    containerRegistry: 'dockerhub'
+    repository: '$(imageName)'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    tags: '$(Build.BuildNumber)'
