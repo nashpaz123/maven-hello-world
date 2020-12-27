@@ -15,7 +15,9 @@ steps:
   workingDirectory: $(appDir)
   displayName: '1. clean'
 
-- script: mvn compile --quiet && ls -R -l target/classes/
+- script: |
+    mvn compile --quiet
+    ls -R -l target/classes/
   workingDirectory: $(appDir)
   displayName: 'compile, per instructions, and check files'
 
