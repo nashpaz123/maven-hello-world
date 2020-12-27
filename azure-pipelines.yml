@@ -11,6 +11,10 @@ steps:
   workingDirectory: my-app/
   displayName: '1. clean'
 
-- script: mvn package && ack -a -f
+- script: mvn package && ls -l target/ && ls -l target/classes/
   workingDirectory: my-app/
   displayName: '2. package and check files'
+
+- script: java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
+  workingDirectory: my-app/
+  displayName: '3. sanity'
