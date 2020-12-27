@@ -13,4 +13,4 @@ steps:
     containerRegistry: 'dockerhub'
     command: 'login'
 
-- script: docker run nashpaz1/maven-hello-world:17
+- script: docker run docker.io/nashpaz1/maven-hello-world:17
