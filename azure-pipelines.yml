@@ -50,8 +50,8 @@ steps:
 #  displayName: Login to Dhub
 #  inputs:
 #    command: login
-#    containerRegistry: my-acr
-- script: docker run $(dockerhub)/nashpaz1/maven-hello-world
+#    containerRegistry: dockerhub
+- script: docker run nashpaz1/maven-hello-world:$(Build.BuildNumber)
 
 #- task: Docker@2
 #  inputs:
