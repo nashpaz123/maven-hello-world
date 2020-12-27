@@ -40,7 +40,7 @@ steps:
   displayName: Build and Push
   inputs:
     containerRegistry: 'dockerhub'
-    repository: 'my-app-1.0'
+    repository: 'maven-hello-world'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
     buildContext: '$(appDir)'
