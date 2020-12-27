@@ -26,8 +26,17 @@ steps:
 - script: java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
   workingDirectory: $(appDir)
   displayName: '3. sanity'
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(appDir)/target/my-app-1.0-SNAPSHOT.jar'
+    artifactName: drop
 
-#- task: PublishBuildArtifacts@1
-#  inputs:
-#    pathToPublish: '$(appDir)/target/my-app-1.0-SNAPSHOT.jar'
-#    artifactName: drop
+#per instructions at: https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/containers/push-image?view=azure-devops
+- task: Docker@2
+  displayName: Build and Push
+  inputs:
+    containerRegistry: 'dockerhub'
+    repository: '$(imageName)'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    tags: '$(Build.BuildNumber)'
