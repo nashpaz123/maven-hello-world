@@ -1,0 +1,16 @@
+# https://github.com/nashpaz123/maven-hello-world
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: mvn clean --quiet
+  displayName: '1. clean'
+
+- script: |
+    mvn package
+    ls -l
+  displayName: '2. package and check files'
