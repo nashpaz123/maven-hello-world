@@ -21,7 +21,9 @@ steps:
   workingDirectory: $(appDir)
   displayName: 'compile, per instructions, and check files'
 
-- script: mvn package --quiet && ls -l target/ 
+- script: |
+    mvn package --quiet 
+    ls -l target/ 
   workingDirectory: $(appDir)
   displayName: '2. package and check files'
 
@@ -38,7 +40,7 @@ steps:
   displayName: Build and Push
   inputs:
     containerRegistry: 'dockerhub'
-    repository: '$(imageName)'
+    repository: 'my-app-1.0'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
     tags: '$(Build.BuildNumber)'
