@@ -7,13 +7,12 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: cd my-app
-  displayName: '0. environment'
-
 - script: mvn clean --quiet
+  workingDirectory: my-app/
   displayName: '1. clean'
 
 - script: |
+  workingDirectory: my-app/
     mvn package
     ls -l
   displayName: '2. package and check files'
