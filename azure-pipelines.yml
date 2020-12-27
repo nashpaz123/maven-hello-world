@@ -11,7 +11,11 @@ steps:
   workingDirectory: my-app/
   displayName: '1. clean'
 
-- script: mvn package && ls -l target/ && ls -l target/classes/
+- script: mvn compile --quiet && ls -R -l target/classes/
+  workingDirectory: my-app/
+  displayName: 'compile, per instructions, and check files'
+
+- script: mvn package --quiet && ls -l target/ 
   workingDirectory: my-app/
   displayName: '2. package and check files'
 
